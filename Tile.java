@@ -20,11 +20,15 @@ public class Tile {
     normal = new Texture("normalTile.png");
   }
   
-  void updateTile() {
+  void updateIcon() {
     switch (tileState) {
       default:
         icon = normalTile;
     }
+  }
+  
+  public void update(float dt) {
+    
   }
   
   public void draw(SpriteBatch sb) {
