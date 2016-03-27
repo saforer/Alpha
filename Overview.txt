@@ -1,0 +1,15 @@
+Overall plan
+-----------------------------------
+BattleMgr owns a Grid
+Grid owns Tiles
+Tiles owns TileState
+Grid owns GridObjects
+Hurtable extends GridObjects
+Character extends Hurtable
+Character owns Attacks
+Player extends Character
+Enemy extends Character
+Players & Enemies own a Controller
+InputProcessing extends Controller
+AI extends Controller
+AI owns AIState
