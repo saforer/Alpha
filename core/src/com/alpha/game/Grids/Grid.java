@@ -1,6 +1,7 @@
 package com.alpha.game.Grids;
 
 import com.alpha.game.BoardObjects.BoardObject;
+import com.alpha.game.BoardObjects.TestObject;
 import com.alpha.game.Tiles.Tile;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -20,6 +21,19 @@ public class Grid {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 tileArray[x][y] = new Tile(x,y);
+            }
+        }
+
+
+        for (int x = 0; x < 3; x++) {
+            for (int y = 0; y < height; y++) {
+                objArray[x][y] = new TestObject(x,y, false);
+            }
+        }
+
+        for (int x = 3; x < 6; x++) {
+            for (int y = 0; y < height; y++) {
+                objArray[x][y] = new TestObject(x,y, true);
             }
         }
     }

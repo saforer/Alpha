@@ -10,11 +10,13 @@ public class BoardObject {
     private int gridX;
     private int gridY;
     private Texture icon;
+    private boolean faceLeft;
 
-    public BoardObject (int x, int y, String str) {
+    public BoardObject (int x, int y, String str, boolean faceLeft) {
         gridX = x;
         gridY = y;
         icon = new Texture(str);
+        this.faceLeft = faceLeft;
     }
 
     public void update(float dt) {
@@ -22,7 +24,18 @@ public class BoardObject {
     }
 
     public void draw(SpriteBatch sb) {
-        int tileSize = 32;
-        sb.draw(icon, gridX * tileSize, gridY * tileSize);
+        float scale = 3;
+        int width = 40;
+        int height = 25;
+        int offsetX = 28;
+        int offsetY = 13;
+        float facing;
+        if (faceLeft) {
+            facing = 1;
+        } else {
+            facing = -1;
+            offsetX += 62;
+        }
+        sb.draw(icon, (gridX * width * scale) + offsetX, (gridY * height * scale) + offsetY, facing * icon.getWidth() * scale, icon.getHeight() * scale);
     }
 }

@@ -7,7 +7,7 @@ import com.alpha.game.Alpha;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.height = 480;
+		config.height = 580;
 		config.width = 720;
 		new LwjglApplication(new Alpha(), config);
 	}

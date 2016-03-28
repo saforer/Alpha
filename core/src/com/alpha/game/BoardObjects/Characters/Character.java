@@ -14,8 +14,8 @@ public class Character extends Hurtable {
     private String name;
     Controller control;
     List<Attack> attackList;
-    public Character (int x, int y, String str) {
-        super (x,y,str);
+    public Character (int x, int y, String str, boolean faceLeft) {
+        super (x,y,str, faceLeft);
         name = str;
         attackList = new ArrayList<Attack>();
     }

@@ -5,8 +5,8 @@ package com.alpha.game.BoardObjects;
  */
 public class Hurtable extends BoardObject {
     int hp = 10;
-    public Hurtable(int x, int y, String str) {
-        super(x, y, str);
+    public Hurtable(int x, int y, String str, boolean faceLeft) {
+        super(x, y, str, faceLeft);
     }
 
     public void damage(int amount) {
