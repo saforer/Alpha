@@ -51,6 +51,11 @@ public class Grid {
     }
     
     public boolean canMoveTo(int x, int y) {
+        if (x < 0) return false;
+        if (y < 0) return false;
+        if (x > width-1) return false;
+        if (y > height-1) return false;
+        
         for (BoardObject b : objList) {
             if (b.getX == x && b.getY == y) {
                 //TODO: Not all objects will block, KEEP THIS IN MIND
