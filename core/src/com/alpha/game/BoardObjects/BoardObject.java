@@ -1,5 +1,7 @@
 package com.alpha.game.BoardObjects;
 
+import com.alpha.game.Grids.Grid;
+import com.alpha.game.Manager.BattleManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -33,7 +35,7 @@ public class BoardObject {
 
     }
     
-    void preMove(Direction dir) {
+    public void preMove(Direction dir) {
         Grid currentGrid = BattleManager.getCurrentGrid();
         int posToLookX = gridX;
         int posToLookY = gridY;
@@ -54,7 +56,7 @@ public class BoardObject {
         }
         
         if (currentGrid.canMoveTo(posToLookX, posToLookY)) {
-            move(Direction dir);
+            move(dir);
         }
     }
     
@@ -91,12 +93,14 @@ public class BoardObject {
         }
         sb.draw(icon, (gridX * width * scale) + offsetX, (gridY * height * scale) + offsetY, facing * icon.getWidth() * scale, icon.getHeight() * scale);
     }
+
+    public int getGridX() {
+        return gridX;
+    }
+
+    public int getGridY() {
+        return gridY;
+    }
 }
 
 
-enum Direction {
-    up,
-    down,
-    left,
-    right
-}

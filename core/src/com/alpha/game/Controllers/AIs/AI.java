@@ -1,5 +1,6 @@
 package com.alpha.game.Controllers.AIs;
 
+import com.alpha.game.BoardObjects.BoardObject;
 import com.alpha.game.Controllers.Controller;
 
 /**
@@ -7,4 +8,7 @@ import com.alpha.game.Controllers.Controller;
  */
 public class AI extends Controller {
     int aiState;
+    public AI (BoardObject parent) {
+        super(parent);
+    }
 }

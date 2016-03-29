@@ -57,7 +57,7 @@ public class Grid {
         if (y > height-1) return false;
         
         for (BoardObject b : objList) {
-            if (b.getX == x && b.getY == y) {
+            if (b.getGridX() == x && b.getGridY() == y) {
                 //TODO: Not all objects will block, KEEP THIS IN MIND
                 return false;
             }

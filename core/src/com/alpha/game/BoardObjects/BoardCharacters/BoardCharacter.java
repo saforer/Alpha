@@ -27,11 +27,15 @@ public class BoardCharacter extends Hurtable {
 
     @Override
     public void update(float dt) {
-        control.update(dt);
+        if (control != null) control.update(dt);
     }
 
     @Override
     public void die() {
         System.out.println("Oh no " + name + " is dead");
+    }
+
+    public void setController(Controller c) {
+        control = c;
     }
 }

@@ -1,6 +1,8 @@
 package com.alpha.game.Manager;
 
 import com.alpha.game.BoardObjects.BoardCharacters.Players.MetPlayer;
+import com.alpha.game.BoardObjects.BoardCharacters.Players.Player;
+import com.alpha.game.Controllers.Gamepads.Gamepad;
 import com.alpha.game.Grids.Grid;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -16,7 +18,9 @@ public class BattleManager {
 
     BattleManager() {
         currentGrid = new Grid();
-        currentGrid.addObject(0,0,new MetPlayer(false));
+        Player tempObject = new MetPlayer(false);
+        tempObject.setController(new Gamepad(tempObject));
+        currentGrid.addObject(0,0,tempObject);
     }
 
     public static BattleManager getI() {
