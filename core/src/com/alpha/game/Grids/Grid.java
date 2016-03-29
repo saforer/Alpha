@@ -49,7 +49,18 @@ public class Grid {
             b.draw(sb);
         }
     }
-
+    
+    public boolean canMoveTo(int x, int y) {
+        for (BoardObject b : objList) {
+            if (b.getX == x && b.getY == y) {
+                //TODO: Not all objects will block, KEEP THIS IN MIND
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
     public void addObject(int x, int y, BoardObject bo) {
         bo.positionSet(x,y);
         objList.add(bo);
