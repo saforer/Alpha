@@ -1,9 +1,12 @@
-package com.alpha.game.BoardObjects.Characters.Players;
+package com.alpha.game.BoardObjects.BoardCharacters.Players;
+
+import com.alpha.game.BoardObjects.BoardCharacters.BoardCharacter;
 
 /**
  * Created by Forer on 3/28/2016.
  */
-public class Player extends com.alpha.game.BoardObjects.Characters.Character {
+public class Player extends BoardCharacter {
+    public Player(String str, boolean faceLeft) {super (str, faceLeft);}
     public Player(int x, int y, String str, boolean faceLeft) {
         super (x,y,str, faceLeft);
     }

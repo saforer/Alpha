@@ -1,5 +1,6 @@
 package com.alpha.game.Manager;
 
+import com.alpha.game.BoardObjects.BoardCharacters.Players.MetPlayer;
 import com.alpha.game.Grids.Grid;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -15,6 +16,7 @@ public class BattleManager {
 
     BattleManager() {
         currentGrid = new Grid();
+        currentGrid.addObject(0,0,new MetPlayer(false));
     }
 
     public static BattleManager getI() {
