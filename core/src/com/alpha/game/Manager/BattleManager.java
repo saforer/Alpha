@@ -11,7 +11,7 @@ public class BattleManager {
     static BattleManager i;
 
 
-    Grid currentGrid;
+    static Grid currentGrid;
 
 
     BattleManager() {
@@ -22,6 +22,10 @@ public class BattleManager {
     public static BattleManager getI() {
         if (i == null) i = new BattleManager();
         return i;
+    }
+    
+    public static Grid getCurrentGrid() {
+        return currentGrid;
     }
 
     public void update(float dt) {
