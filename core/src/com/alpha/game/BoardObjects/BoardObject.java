@@ -32,6 +32,49 @@ public class BoardObject {
     public void update(float dt) {
 
     }
+    
+    void preMove(Direction dir) {
+        Grid currentGrid = BattleManager.getCurrentGrid();
+        int posToLookX = gridX;
+        int posToLookY = gridY;
+        switch (dir) {
+            default:
+            case up:
+                posToLookY++;
+                break;
+            case down:
+                posToLookY--;
+                break;
+            case left:
+                posToLookX--;
+                break;
+            case right:
+                posToLookX++;
+                break;
+        }
+        
+        if (currentGrid.canMoveTo(posToLookX, posToLookY)) {
+            move(Direction dir);
+        }
+    }
+    
+    void move(Direction dir) {
+        switch (dir) {
+            default:
+            case up:
+                gridY++;
+                break;
+            case down:
+                gridY--;
+                break;
+            case left:
+                gridX--;
+                break;
+            case right:
+                gridX++;
+                break;
+        }
+    }
 
     public void draw(SpriteBatch sb) {
         float scale = 3;
@@ -48,4 +91,12 @@ public class BoardObject {
         }
         sb.draw(icon, (gridX * width * scale) + offsetX, (gridY * height * scale) + offsetY, facing * icon.getWidth() * scale, icon.getHeight() * scale);
     }
+}
+
+
+enum Direction {
+    up,
+    down,
+    left,
+    right
 }
