@@ -19,9 +19,15 @@ public class Grid {
     public Grid () {
         tileArray = new Tile[width][height];
 
-        for (int x = 0; x < width; x++) {
+        for (int x = 0; x < 3; x++) {
             for (int y = 0; y < height; y++) {
-                tileArray[x][y] = new Tile(x,y);
+                tileArray[x][y] = new Tile(x,y, true);
+            }
+        }
+
+        for (int x = 3; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                tileArray[x][y] = new Tile(x,y, false);
             }
         }
     }
@@ -50,11 +56,15 @@ public class Grid {
         }
     }
     
-    public boolean canMoveTo(int x, int y) {
+    public boolean canMoveTo(int x, int y, boolean friendly) {
         if (x < 0) return false;
         if (y < 0) return false;
         if (x > width-1) return false;
         if (y > height-1) return false;
+
+        if (tileArray[x][y].isFriendly() ^ friendly) {
+            return false;
+        }
         
         for (BoardObject b : objList) {
             if (b.getGridX() == x && b.getGridY() == y) {

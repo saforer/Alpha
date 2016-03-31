@@ -11,27 +11,40 @@ public class Tile {
     private int gridY;
     private Texture icon;
     private int state;
+    private boolean friendlyTeam = true;
 
     //Static textures to load
-    private static Texture normalTile;
+    private static Texture friendlyNormal;
+    private static Texture enemyNormal;
 
-    public Tile (int x, int y) {
+    public Tile (int x, int y, boolean friendlyTeam) {
         gridX = x;
         gridY = y;
-        if (normalTile == null) {
+        this.friendlyTeam = friendlyTeam;
+        if (friendlyNormal == null) {
             loadStatic();
         }
         updateIcon();
     }
 
     void loadStatic() {
-        normalTile = new Texture("normalTile.png");
+        friendlyNormal = new Texture("friendlyTile.png");
+        enemyNormal = new Texture("enemyTile.png");
     }
 
     void updateIcon() {
-        switch (state) {
-            default:
-                icon = normalTile;
+        if (friendlyTeam) {
+            switch (state) {
+                default:
+                    icon = friendlyNormal;
+                    break;
+            }
+        } else {
+            switch (state) {
+                default:
+                    icon = enemyNormal;
+                    break;
+            }
         }
     }
 
@@ -44,5 +57,9 @@ public class Tile {
         int width = 40;
         int height = 25;
         sb.draw(icon, (gridX * width) * scale, (gridY * height) * scale, icon.getWidth() * scale, icon.getHeight() * scale);
+    }
+
+    public boolean isFriendly() {
+        return friendlyTeam;
     }
 }

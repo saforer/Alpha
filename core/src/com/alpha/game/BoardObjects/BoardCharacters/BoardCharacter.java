@@ -28,6 +28,17 @@ public class BoardCharacter extends Hurtable {
     @Override
     public void update(float dt) {
         if (control != null) control.update(dt);
+        if (moving) {
+            if (movementPercent>=1.0f) {
+                moving = false;
+                oldX = 0;
+                oldY = 0;
+                movementPercent = 0.0f;
+            } else {
+                lerpPos();
+                movementPercent+=dt * 4;
+            }
+        }
     }
 
     @Override

@@ -11,24 +11,49 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class BoardObject {
     private int gridX;
     private int gridY;
+    public int renderX;
+    public int renderY;
     private Texture icon;
     //All things face to the right in the base picture, and if they don't face right in the game, we set the faceLeft to be true;
-    private boolean faceLeft;
+    private boolean friendly;
 
-    public BoardObject (String str, boolean faceLeft) {
+    //Moving stuffs
+    public boolean moving = false;
+    public float movementPercent = 0.0f;
+    public int oldX;
+    public int oldY;
+
+    public BoardObject (String str, boolean friendly) {
         icon = new Texture(str);
-        this.faceLeft = faceLeft;
+        this.friendly = friendly;
     }
 
-    public BoardObject (int x, int y, String str, boolean faceLeft) {
+    public BoardObject (int x, int y, String str, boolean friendly) {
         positionSet(x,y);
         icon = new Texture(str);
-        this.faceLeft = faceLeft;
+        this.friendly = friendly;
     }
 
-    public void positionSet (int x, int y) {
+    public void positionSet(int x, int y) {
         gridX = x;
         gridY = y;
+        float scale = 3;
+        int width = 40;
+        int height = 25;
+        int offsetX = 28;
+        int offsetY = 13;
+        renderX = (int) (gridX * width * scale) + offsetX;
+        renderY = (int) (gridY * height * scale) + offsetY;
+    }
+
+    public void lerpPos() {
+        float scale = 3;
+        int width = 40;
+        int height = 25;
+        int offsetX = 28;
+        int offsetY = 13;
+        renderX = (int) Math.floor(((oldX * width * scale)) + movementPercent * (((gridX * width * scale)) - (oldX * width * scale))) + offsetX;
+        renderY = (int) Math.floor(((oldY * height * scale)) + movementPercent * (((gridY * height * scale)) - (oldY * height * scale)))  + offsetY;
     }
 
     public void update(float dt) {
@@ -55,12 +80,15 @@ public class BoardObject {
                 break;
         }
         
-        if (currentGrid.canMoveTo(posToLookX, posToLookY)) {
+        if (currentGrid.canMoveTo(posToLookX, posToLookY, friendly) && !moving) {
             move(dir);
         }
     }
     
     void move(Direction dir) {
+        moving = true;
+        oldX = gridX;
+        oldY = gridY;
         switch (dir) {
             default:
             case up:
@@ -80,18 +108,16 @@ public class BoardObject {
 
     public void draw(SpriteBatch sb) {
         float scale = 3;
-        int width = 40;
-        int height = 25;
-        int offsetX = 28;
-        int offsetY = 13;
         float facing;
-        if (!faceLeft) {
+        int facingOffset;
+        if (friendly) {
             facing = 1;
+            facingOffset = 0;
         } else {
             facing = -1;
-            offsetX += 62;
+            facingOffset = 62;
         }
-        sb.draw(icon, (gridX * width * scale) + offsetX, (gridY * height * scale) + offsetY, facing * icon.getWidth() * scale, icon.getHeight() * scale);
+        sb.draw(icon, renderX + facingOffset, renderY, facing * icon.getWidth() * scale, icon.getHeight() * scale);
     }
 
     public int getGridX() {
