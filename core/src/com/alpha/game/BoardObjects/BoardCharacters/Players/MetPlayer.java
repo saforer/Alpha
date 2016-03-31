@@ -5,6 +5,6 @@ package com.alpha.game.BoardObjects.BoardCharacters.Players;
  */
 public class MetPlayer extends Player {
     public MetPlayer() {
-        super("Mettaur1.png");
+        super("Mettaur1.png", 11, 21);
     }
 }

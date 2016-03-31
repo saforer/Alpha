@@ -16,6 +16,8 @@ public class BoardObject {
     private Texture icon;
     //All things face to the right in the base picture, and if they don't face right in the game, we set the faceLeft to be true;
     private boolean friendly;
+    int xOffset;
+    int yOffset;
 
     //Moving stuffs
     public boolean moving = false;
@@ -23,8 +25,10 @@ public class BoardObject {
     public int oldX;
     public int oldY;
 
-    public BoardObject (String str, boolean friendly) {
+    public BoardObject (String str, int xOffset, int yOffset, boolean friendly) {
         icon = new Texture(str);
+        this.xOffset = xOffset;
+        this.yOffset = yOffset;
         this.friendly = friendly;
     }
 
@@ -37,23 +41,17 @@ public class BoardObject {
     public void positionSet(int x, int y) {
         gridX = x;
         gridY = y;
-        float scale = 3;
-        int width = 40;
-        int height = 25;
-        int offsetX = 28;
-        int offsetY = 13;
-        renderX = (int) (gridX * width * scale) + offsetX;
-        renderY = (int) (gridY * height * scale) + offsetY;
+        movementPercent = 1.0f;
+        lerpPos();
+        movementPercent = 0.0f;
     }
 
     public void lerpPos() {
         float scale = 3;
         int width = 40;
         int height = 25;
-        int offsetX = 28;
-        int offsetY = 13;
-        renderX = (int) Math.floor(((oldX * width * scale)) + movementPercent * (((gridX * width * scale)) - (oldX * width * scale))) + offsetX;
-        renderY = (int) Math.floor(((oldY * height * scale)) + movementPercent * (((gridY * height * scale)) - (oldY * height * scale)))  + offsetY;
+        renderX = (int) Math.floor(((oldX * width * scale)) + movementPercent * (((gridX * width * scale)) - (oldX * width * scale))) + (xOffset * 3);
+        renderY = (int) Math.floor(((oldY * height * scale)) + movementPercent * (((gridY * height * scale)) - (oldY * height * scale)))  + yOffset;
     }
 
     public void update(float dt) {
@@ -115,7 +113,7 @@ public class BoardObject {
             facingOffset = 0;
         } else {
             facing = -1;
-            facingOffset = 62;
+            facingOffset = icon.getWidth() * 3;
         }
         sb.draw(icon, renderX + facingOffset, renderY, facing * icon.getWidth() * scale, icon.getHeight() * scale);
     }

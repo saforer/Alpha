@@ -20,8 +20,8 @@ public class BoardCharacter extends Hurtable {
         attackList = new ArrayList<Attack>();
     }
 
-    public BoardCharacter(String str, boolean faceLeft) {
-        super (str, faceLeft);
+    public BoardCharacter(String str, int xOffset, int yOffset, boolean faceLeft) {
+        super (str, xOffset, yOffset, faceLeft);
         attackList = new ArrayList<Attack>();
     }
 

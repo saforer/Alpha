@@ -5,6 +5,6 @@ package com.alpha.game.BoardObjects.BoardCharacters.Enemies;
  */
 public class MetEnemy extends Enemy {
     public MetEnemy() {
-        super("Mettaur1.png");
+        super("Mettaur1.png", 11, 21);
     }
 }
